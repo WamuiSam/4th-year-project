@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "99889374890",
+    "project_id": "safiri-school-project",
+    "storage_bucket": "safiri-school-project.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:99889374890:android:35758d3a55fcd98e3692d3",
+        "android_client_info": {
+          "package_name": "com.example.wamui"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "99889374890-9uair13r2j3eg4ajcivdmvlptg62rqf6.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.wamui",
+            "certificate_hash": "4e8bb2176067cd066fb2bf0f95847e8e44e71a1c"
+          }
+        },
+        {
+          "client_id": "99889374890-oflprg9md6mt2jv3rqdpsttjodb3e79v.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyADX-aBaqvNEmNtayKiQwXeu152t_2E4uc"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "99889374890-oflprg9md6mt2jv3rqdpsttjodb3e79v.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
