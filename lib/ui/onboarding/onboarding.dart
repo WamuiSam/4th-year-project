@@ -50,8 +50,17 @@ class OnboardingPage extends StatelessWidget {
                 ],
               ),
               onPressed: () async {
-                await AuthenticationService.loginWithGoogle();
-                AutoRouter.of(context).push(HomeRoute());
+                try {
+                  await AuthenticationService.loginWithGoogle().then(
+                      (value) => AutoRouter.of(context).push(HomeRoute()));
+                } catch (e) {
+                  showCupertinoDialog(
+                      context: context,
+                      builder: (context) => CupertinoAlertDialog(
+                            title: Text("Error"),
+                            content: Text(e.toString()),
+                          ));
+                }
               })
         ],
       ),
