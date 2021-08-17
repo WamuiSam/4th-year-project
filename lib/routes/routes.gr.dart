@@ -23,8 +23,10 @@ class AppRouter extends _i1.RootStackRouter {
         }),
     HomeRoute.name: (routeData) => _i1.MaterialPageX<dynamic>(
         routeData: routeData,
-        builder: (_) {
-          return const _i4.HomePage();
+        builder: (data) {
+          final args =
+              data.argsAs<HomeRouteArgs>(orElse: () => const HomeRouteArgs());
+          return _i4.HomePage(key: args.key);
         })
   };
 
@@ -41,8 +43,15 @@ class OnboardingRoute extends _i1.PageRouteInfo {
   static const String name = 'OnboardingRoute';
 }
 
-class HomeRoute extends _i1.PageRouteInfo {
-  const HomeRoute() : super(name, path: '/home-page');
+class HomeRoute extends _i1.PageRouteInfo<HomeRouteArgs> {
+  HomeRoute({_i2.Key? key})
+      : super(name, path: '/home-page', args: HomeRouteArgs(key: key));
 
   static const String name = 'HomeRoute';
+}
+
+class HomeRouteArgs {
+  const HomeRouteArgs({this.key});
+
+  final _i2.Key? key;
 }
