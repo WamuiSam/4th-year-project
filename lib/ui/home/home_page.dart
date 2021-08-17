@@ -24,7 +24,7 @@ class HomePage extends StatelessWidget {
       body: Stack(
         children: [
           GoogleMap(
-            mapType: MapType.hybrid,
+            mapType: MapType.normal,
             initialCameraPosition: _kGooglePlex,
             onMapCreated: (GoogleMapController controller) {
               // _controller.complete(controller);
