@@ -2,6 +2,8 @@ import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:geolocator/geolocator.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:wamui/routes/routes.gr.dart';
 import 'package:wamui/services/authentication_service.dart';
 
@@ -51,8 +53,12 @@ class OnboardingPage extends StatelessWidget {
               ),
               onPressed: () async {
                 try {
-                  await AuthenticationService.loginWithGoogle().then(
-                      (value) => AutoRouter.of(context).push(HomeRoute()));
+                  var x = await Geolocator.getCurrentPosition();
+                  await AuthenticationService.loginWithGoogle().then((value) =>
+                      AutoRouter.of(context).push(HomeRoute(
+                          myLocation: CameraPosition(
+                              zoom: 20,
+                              target: LatLng(x.latitude, x.longitude)))));
                 } catch (e) {
                   showCupertinoDialog(
                       context: context,

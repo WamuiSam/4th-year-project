@@ -4,37 +4,14 @@ import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 
 class HomePage extends StatefulWidget {
-  HomePage({Key? key}) : super(key: key);
+  final CameraPosition myLocation;
+  HomePage({Key? key, required this.myLocation}) : super(key: key);
 
   @override
   _HomePageState createState() => _HomePageState();
 }
 
 class _HomePageState extends State<HomePage> {
-  CameraPosition _kGooglePlex = CameraPosition(
-    target: LatLng(37.42796133580664, -122.085749655962),
-    zoom: 14.4746,
-  );
-
-  CameraPosition _kLake = CameraPosition(
-      bearing: 192.8334901395799,
-      target: LatLng(37.43296265331129, -122.08832357078792),
-      tilt: 59.440717697143555,
-      zoom: 19.151926040649414);
-
-  getCurrentPosition() async {
-    var x = await Geolocator.getCurrentPosition();
-    setState(() {
-      _kGooglePlex = CameraPosition(target: LatLng(x.latitude, x.longitude));
-    });
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    getCurrentPosition();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -43,10 +20,8 @@ class _HomePageState extends State<HomePage> {
           GoogleMap(
             mapType: MapType.normal,
             myLocationEnabled: true,
-            initialCameraPosition: _kGooglePlex,
-            onMapCreated: (GoogleMapController controller) {
-              // _controller.complete(controller);
-            },
+            initialCameraPosition: widget.myLocation,
+            onMapCreated: (GoogleMapController controller) async {},
           ),
           Positioned(
               top: 100,

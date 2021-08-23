@@ -25,6 +25,7 @@ class MyApp extends StatelessWidget {
             primarySwatch: Colors.purple),
         routeInformationParser: _appRouter.defaultRouteParser(),
         routerDelegate: _appRouter.delegate(
-            initialDeepLink: user != null ? '/home-page' : '/'));
+            //  initialDeepLink: user != null ? '/home-page' : '/'
+            ));
   }
 }
