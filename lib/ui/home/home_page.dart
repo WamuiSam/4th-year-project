@@ -1,7 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:geolocator/geolocator.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
+import 'package:place_picker/place_picker.dart';
 
 class HomePage extends StatefulWidget {
   final CameraPosition myLocation;
@@ -32,6 +32,14 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextField(
+                      onTap: () async {
+                        LocationResult result =
+                            await Navigator.of(context).push(MaterialPageRoute(
+                                builder: (context) => PlacePicker(
+                                      "AIzaSyADX-aBaqvNEmNtayKiQwXeu152t_2E4uc",
+                                      displayLocation: widget.myLocation.target,
+                                    )));
+                      },
                       decoration: InputDecoration(
                           hintText: "Where to",
                           enabledBorder: OutlineInputBorder(
