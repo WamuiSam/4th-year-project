@@ -1,7 +1,12 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:place_picker/entities/entities.dart';
+import 'package:wamui/cubits/from_cubit%20.dart';
+import 'package:wamui/cubits/polylines_cubit.dart';
+import 'package:wamui/cubits/where_to_cubit.dart';
 import 'package:wamui/routes/routes.gr.dart';
 
 void main() async {
@@ -17,15 +22,22 @@ class MyApp extends StatelessWidget {
   User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
-    return MaterialApp.router(
-        debugShowCheckedModeBanner: false,
-        title: "Trafiki",
-        theme: ThemeData(
-            textTheme: GoogleFonts.latoTextTheme(),
-            primarySwatch: Colors.purple),
-        routeInformationParser: _appRouter.defaultRouteParser(),
-        routerDelegate: _appRouter.delegate(
-            //  initialDeepLink: user != null ? '/home-page' : '/'
-            ));
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(create: (context) => WhereToCubit(LocationResult())),
+        BlocProvider(create: (context) => FromCubit(LocationResult())),
+        BlocProvider(create: (context) => PolyLinesCubit({})),
+      ],
+      child: MaterialApp.router(
+          debugShowCheckedModeBanner: false,
+          title: "Trafiki",
+          theme: ThemeData(
+              textTheme: GoogleFonts.latoTextTheme(),
+              primarySwatch: Colors.purple),
+          routeInformationParser: _appRouter.defaultRouteParser(),
+          routerDelegate: _appRouter.delegate(
+              //  initialDeepLink: user != null ? '/home-page' : '/'
+              )),
+    );
   }
 }
