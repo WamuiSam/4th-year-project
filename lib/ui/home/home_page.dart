@@ -24,7 +24,7 @@ class _HomePageState extends State<HomePage> {
         children: [
           GoogleMap(
             mapType: MapType.normal,
-            polylines: context.watch<PolyLinesCubit>().state,
+            polylines: {context.read<PolyLinesCubit>().state},
             myLocationEnabled: true,
             initialCameraPosition: widget.myLocation,
             onMapCreated: (GoogleMapController controller) async {},
@@ -96,25 +96,25 @@ class _HomePageState extends State<HomePage> {
                                   .latLng!
                                   .latitude),
                         );
+                        print(polylineResult.errorMessage);
                         List<LatLng> polylineCoordinates = [];
-                        if (polylineResult.points.isNotEmpty) {
-                          // loop through all PointLatLng points and convert them
-                          // to a list of LatLng, required by the Polyline
-                          polylineResult.points.forEach((PointLatLng point) {
-                            polylineCoordinates
-                                .add(LatLng(point.latitude, point.longitude));
-                          });
+                        // loop through all PointLatLng points and convert them
+                        // to a list of LatLng, required by the Polyline
+                        polylineResult.points.forEach((PointLatLng point) {
+                          polylineCoordinates
+                              .add(LatLng(point.latitude, point.longitude));
+                        });
 
-                          Polyline polyline = Polyline(
-                              polylineId: PolylineId("Poly"),
-                              color: Color.fromARGB(255, 40, 122, 198),
-                              points: polylineCoordinates);
+                        Polyline polyline = Polyline(
+                            polylineId: PolylineId("Poly"),
+                            color: Color.fromARGB(255, 40, 122, 198),
+                            points: polylineCoordinates);
 
-                          // add the constructed polyline as a set of points
-                          // to the polyline set, which will eventually
-                          // end up showing up on the map
-                          context.read<PolyLinesCubit>().state.add(polyline);
-                        }
+                        // add the constructed polyline as a set of points
+                        // to the polyline set, which will eventually
+                        // end up showing up on the map
+                        print("Adding polyline");
+                        context.read<PolyLinesCubit>().emit(polyline);
                       },
                       decoration: InputDecoration(
                           hintText: context.watch<FromCubit>().state.name ??
@@ -139,7 +139,7 @@ class _HomePageState extends State<HomePage> {
                   color: Colors.purple,
                   child: Text("Check Traffick Info"),
                   onPressed: () {
-                    print(context.read<PolyLinesCubit>().state.toString());
+                    print(context.read<PolyLinesCubit>().state.polylineId);
                   }))
         ],
       ),

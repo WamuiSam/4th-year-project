@@ -3,6 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:google_fonts/google_fonts.dart';
+import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:place_picker/entities/entities.dart';
 import 'package:wamui/cubits/from_cubit%20.dart';
 import 'package:wamui/cubits/polylines_cubit.dart';
@@ -26,7 +27,9 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => WhereToCubit(LocationResult())),
         BlocProvider(create: (context) => FromCubit(LocationResult())),
-        BlocProvider(create: (context) => PolyLinesCubit({})),
+        BlocProvider(
+            create: (context) =>
+                PolyLinesCubit(Polyline(polylineId: PolylineId('null')))),
       ],
       child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
