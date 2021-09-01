@@ -94,7 +94,7 @@ class _HomePageState extends State<HomePage> {
                                   .read<WhereToCubit>()
                                   .state
                                   .latLng!
-                                  .latitude),
+                                  .longitude),
                         );
                         print(polylineResult.errorMessage);
                         List<LatLng> polylineCoordinates = [];
