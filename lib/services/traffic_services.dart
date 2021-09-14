@@ -9,9 +9,12 @@ class TrafficServices {
       required double latitude,
       required double longitude}) async {
     Dio dio = Dio();
-    var response = await dio.get(
-        'https://api.tomtom.com/traffic/services/$versionNumber/flowSegmentData/relative0/$zoom/json');
-
-    return FlowSegmentData.fromJson(response.data['flowSegmentData']);
+    try {
+      var response = await dio.get(
+          'https://api.tomtom.com/traffic/services/$versionNumber/flowSegmentData/relative0/$zoom/json');
+      return FlowSegmentData.fromJson(response.data['flowSegmentData']);
+    } catch (e) {
+      throw e.toString();
+    }
   }
 }
