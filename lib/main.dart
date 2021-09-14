@@ -31,7 +31,7 @@ class MyApp extends StatelessWidget {
         BlocProvider(create: (context) => TrafickInfoCubit()),
         BlocProvider(
             create: (context) =>
-                PolyLinesCubit(Polyline(polylineId: PolylineId('null')))),
+                PolyLinesCubit(Polyline(polylineId: PolylineId('nill')))),
       ],
       child: MaterialApp.router(
           debugShowCheckedModeBanner: false,
