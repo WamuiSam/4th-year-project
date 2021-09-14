@@ -16,31 +16,33 @@ class TraffickInfo extends StatelessWidget {
         style: 'relative0',
         versionNumber: 4,
         zoom: 10);
-    return BlocConsumer<TrafickInfoCubit, TrafickInfoState>(
-      listener: (context, state) {
-        if (state is TrafickInfoFailed) {
-          showCupertinoDialog(
-              context: context,
-              builder: (context) => CupertinoAlertDialog(
-                    title: Text("Error"),
-                    content: Text(state.failed),
-                  ));
-        }
-      },
-      builder: (context, state) {
-        if (state is TrafickInfoLoading) {
-          return Center(
-            child: CircularProgressIndicator(),
-          );
-        }
-        if (state is TrafickInfoSuccess) {
-          //Return the ui on success
-          return Center(
-            child: Text(state.flowSegmentData.toString()),
-          );
-        }
-        return Container();
-      },
+    return Scaffold(
+      body: BlocConsumer<TrafickInfoCubit, TrafickInfoState>(
+        listener: (context, state) {
+          if (state is TrafickInfoFailed) {
+            showCupertinoDialog(
+                context: context,
+                builder: (context) => CupertinoAlertDialog(
+                      title: Text("Error"),
+                      content: Text(state.failed),
+                    ));
+          }
+        },
+        builder: (context, state) {
+          if (state is TrafickInfoLoading) {
+            return Center(
+              child: CircularProgressIndicator(),
+            );
+          }
+          if (state is TrafickInfoSuccess) {
+            //Return the ui on success
+            return Center(
+              child: Text(state.flowSegmentData.toString()),
+            );
+          }
+          return Container();
+        },
+      ),
     );
   }
 }
