@@ -1,3 +1,4 @@
+import 'package:auto_route/auto_route.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -7,6 +8,7 @@ import 'package:place_picker/place_picker.dart';
 import 'package:wamui/cubits/from_cubit%20.dart';
 import 'package:wamui/cubits/polylines_cubit.dart';
 import 'package:wamui/cubits/where_to_cubit.dart';
+import 'package:wamui/routes/routes.gr.dart';
 
 class HomePage extends StatefulWidget {
   final CameraPosition myLocation;
@@ -140,6 +142,7 @@ class _HomePageState extends State<HomePage> {
                   child: Text("Check Traffick Info"),
                   onPressed: () {
                     print(context.read<PolyLinesCubit>().state.polylineId);
+                    AutoRouter.of(context).push(TraffickInfo());
                   }))
         ],
       ),
