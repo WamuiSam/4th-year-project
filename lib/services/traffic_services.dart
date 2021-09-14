@@ -11,9 +11,17 @@ class TrafficServices {
     Dio dio = Dio();
     try {
       var response = await dio.get(
-          'https://api.tomtom.com/traffic/services/$versionNumber/flowSegmentData/relative0/$zoom/json');
+          'https://api.tomtom.com/traffic/services/$versionNumber/flowSegmentData/relative0/$zoom/json',
+          queryParameters: {
+            'point': "$latitude,$longitude",
+            'unit': "KMPH",
+            'openLR': true,
+            'key': "S42cPLu9hFMTfNBinlRHunCTPk4vLW7K"
+          });
+      print(response.data);
       return FlowSegmentData.fromJson(response.data['flowSegmentData']);
     } catch (e) {
+      print(e.toString());
       throw e.toString();
     }
   }
