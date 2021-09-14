@@ -7,6 +7,7 @@ import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:place_picker/entities/entities.dart';
 import 'package:wamui/cubits/from_cubit%20.dart';
 import 'package:wamui/cubits/polylines_cubit.dart';
+import 'package:wamui/cubits/traffick_info_cubit/trafick_info_cubit.dart';
 import 'package:wamui/cubits/where_to_cubit.dart';
 import 'package:wamui/routes/routes.gr.dart';
 
@@ -27,6 +28,7 @@ class MyApp extends StatelessWidget {
       providers: [
         BlocProvider(create: (context) => WhereToCubit(LocationResult())),
         BlocProvider(create: (context) => FromCubit(LocationResult())),
+        BlocProvider(create: (context) => TrafickInfoCubit()),
         BlocProvider(
             create: (context) =>
                 PolyLinesCubit(Polyline(polylineId: PolylineId('null')))),
