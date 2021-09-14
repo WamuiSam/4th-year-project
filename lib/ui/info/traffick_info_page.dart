@@ -17,6 +17,9 @@ class TraffickInfo extends StatelessWidget {
         versionNumber: 4,
         zoom: 10);
     return Scaffold(
+      appBar: CupertinoNavigationBar(
+        middle: Text("Info"),
+      ),
       body: BlocConsumer<TrafickInfoCubit, TrafickInfoState>(
         listener: (context, state) {
           if (state is TrafickInfoFailed) {
