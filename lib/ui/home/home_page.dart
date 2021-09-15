@@ -1,12 +1,15 @@
 import 'package:auto_route/auto_route.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_polyline_points/flutter_polyline_points.dart';
 import 'package:google_maps_flutter/google_maps_flutter.dart';
 import 'package:place_picker/place_picker.dart';
+import 'package:wamui/cubits/dark_theme_cubit.dart';
 import 'package:wamui/cubits/from_cubit%20.dart';
 import 'package:wamui/cubits/polylines_cubit.dart';
+import 'package:restart_app/restart_app.dart';
 import 'package:wamui/cubits/where_to_cubit.dart';
 import 'package:wamui/routes/routes.gr.dart';
 
@@ -31,6 +34,49 @@ class _HomePageState extends State<HomePage> {
             initialCameraPosition: widget.myLocation,
             onMapCreated: (GoogleMapController controller) async {},
           ),
+          Positioned(
+              child: CupertinoButton(
+                  child: Icon(
+                    CupertinoIcons.settings,
+                    size: 40,
+                  ),
+                  onPressed: () {
+                    showModalBottomSheet(
+                        context: context,
+                        builder: (context) => Material(
+                              child: Column(
+                                mainAxisSize: MainAxisSize.min,
+                                children: [
+                                  UserAccountsDrawerHeader(
+                                      accountName: Container(),
+                                      accountEmail: Text(FirebaseAuth
+                                          .instance.currentUser!.email!)),
+                                  ListTile(
+                                    title: Text("Dark theme"),
+                                    subtitle: Text("Toggle dark theme"),
+                                    trailing: CupertinoSwitch(
+                                        value: context
+                                            .watch<DarkThemeCubit>()
+                                            .state,
+                                        onChanged: (val) {
+                                          context
+                                              .read<DarkThemeCubit>()
+                                              .toggle(val);
+                                        }),
+                                  ),
+                                  ListTile(
+                                    onTap: () async {
+                                      await FirebaseAuth.instance.signOut();
+                                      Restart.restartApp();
+                                    },
+                                    leading: CircleAvatar(),
+                                    title: Text("Logout"),
+                                    subtitle: Text("Logout of the app"),
+                                  ),
+                                ],
+                              ),
+                            ));
+                  })),
           Positioned(
               top: 100,
               left: 20,
