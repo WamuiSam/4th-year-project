@@ -39,8 +39,17 @@ class TraffickInfo extends StatelessWidget {
           }
           if (state is TrafickInfoSuccess) {
             //Return the ui on success
-            return Center(
-              child: Text(state.flowSegmentData.toString()),
+            return Column(
+              children: [
+                Row(
+                  children: [
+                    Expanded(child: Text("Free flow speed")),
+                    Expanded(
+                        child: Text(
+                            state.flowSegmentData.freeFlowSpeed.toString()))
+                  ],
+                )
+              ],
             );
           }
           return Container();
