@@ -12,7 +12,12 @@ import 'package:wamui/cubits/traffick_info_cubit/trafick_info_cubit.dart';
 import 'package:wamui/cubits/where_to_cubit.dart';
 import 'package:wamui/routes/routes.gr.dart';
 
+//where program starts. this is the entry point of the program
+
 void main() async {
+//links program with the cubits
+// cubits store observable data temporarily. it is a lightweight state management
+
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiBlocProvider(providers: [
@@ -26,15 +31,19 @@ void main() async {
   ], child: MyApp()));
 }
 
+//this is the entry point of the firebase SDK
+// ignore: must_be_immutable
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-  final Future<FirebaseApp> _initialization = Firebase.initializeApp();
   var _appRouter = AppRouter();
   User? user = FirebaseAuth.instance.currentUser;
   @override
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
+
+      //defines the system title and theme and sets app to light theme by default
+
       title: "Trafiki",
       theme: ThemeData(
           textTheme: GoogleFonts.latoTextTheme(),
@@ -43,9 +52,7 @@ class MyApp extends StatelessWidget {
               : Brightness.light,
           primarySwatch: Colors.purple),
       routeInformationParser: _appRouter.defaultRouteParser(),
-      routerDelegate: _appRouter.delegate(
-          // initialDeepLink: user != null ? '/home-page' : '/'
-          ),
+      routerDelegate: _appRouter.delegate(),
     );
   }
 }

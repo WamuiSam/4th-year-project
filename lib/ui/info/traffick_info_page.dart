@@ -10,6 +10,8 @@ class TraffickInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var place = context.read<WhereToCubit>().state;
+
+    //reads data from where to cubit
     context.read<TrafickInfoCubit>().getInfo(
         latitude: place.latLng!.latitude,
         longitude: place.latLng!.longitude,

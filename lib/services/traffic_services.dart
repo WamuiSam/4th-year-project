@@ -1,6 +1,9 @@
 import 'package:dio/dio.dart';
 import 'package:wamui/models/flow_segment_data.dart';
 
+//links traffic API to get data
+//requires latitude and longitude of a location before getting the traffic details
+
 class TrafficServices {
   static Future<FlowSegmentData> getFlowSegmentData(
       {required int versionNumber,
@@ -19,6 +22,7 @@ class TrafficServices {
             'key': "S42cPLu9hFMTfNBinlRHunCTPk4vLW7K"
           });
       print(response.data);
+
       return FlowSegmentData.fromJson(response.data['flowSegmentData']);
     } catch (e) {
       print(e.toString());

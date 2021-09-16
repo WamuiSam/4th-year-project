@@ -8,6 +8,7 @@ import 'package:tap_debouncer/tap_debouncer.dart';
 import 'package:wamui/routes/routes.gr.dart';
 import 'package:wamui/services/authentication_service.dart';
 
+//on boarding page
 class OnboardingPage extends StatelessWidget {
   const OnboardingPage({Key? key}) : super(key: key);
 
@@ -34,6 +35,8 @@ class OnboardingPage extends StatelessWidget {
           SizedBox(
             height: 20,
           ),
+
+          //user has to sign in with google for system to function
           TapDebouncer(
             onTap: () async {
               try {
