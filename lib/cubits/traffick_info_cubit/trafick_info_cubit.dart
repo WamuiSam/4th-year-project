@@ -5,6 +5,7 @@ import 'package:wamui/models/flow_segment_data.dart';
 import 'package:wamui/services/traffic_services.dart';
 part 'trafick_info_state.dart';
 
+//cubit that stores info about traffic
 class TrafickInfoCubit extends Cubit<TrafickInfoState> {
   TrafickInfoCubit() : super(TrafickInfoInitial());
 
