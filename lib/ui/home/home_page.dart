@@ -27,16 +27,20 @@ class _HomePageState extends State<HomePage> {
     return Scaffold(
       body: Stack(
         children: [
+          //
           GoogleMap(
             mapType: MapType.normal,
+            //reads from polylines cubit
             polylines: {context.read<PolyLinesCubit>().state},
             myLocationEnabled: true,
+            //initial position is user's location
             initialCameraPosition: widget.myLocation,
             onMapCreated: (GoogleMapController controller) async {},
           ),
           Positioned(
               child: CupertinoButton(
                   child: Icon(
+                    //settings page
                     CupertinoIcons.settings,
                     size: 40,
                   ),
@@ -52,6 +56,7 @@ class _HomePageState extends State<HomePage> {
                                       accountEmail: Text(FirebaseAuth
                                           .instance.currentUser!.email!)),
                                   ListTile(
+                                    //select dark  theme (light theme is default)
                                     title: Text("Dark theme"),
                                     subtitle: Text("Toggle dark theme"),
                                     trailing: CupertinoSwitch(
@@ -60,11 +65,13 @@ class _HomePageState extends State<HomePage> {
                                             .state,
                                         onChanged: (val) {
                                           context
+                                              //reads from dark theme cubit
                                               .read<DarkThemeCubit>()
                                               .toggle(val);
                                         }),
                                   ),
                                   ListTile(
+                                    //user log out
                                     onTap: () async {
                                       await FirebaseAuth.instance.signOut();
                                       Restart.restartApp();
@@ -86,16 +93,18 @@ class _HomePageState extends State<HomePage> {
                   mainAxisSize: MainAxisSize.min,
                   children: [
                     TextField(
+                      //textfield which saves data to where-to cubit
                       controller: TextEditingController(
                           text: context.watch<WhereToCubit>().state.name),
                       onTap: () async {
+                        //links with Google API to select user's destination
                         LocationResult result =
                             await Navigator.of(context).push(MaterialPageRoute(
                                 builder: (context) => PlacePicker(
                                       "AIzaSyADX-aBaqvNEmNtayKiQwXeu152t_2E4uc",
                                       displayLocation: widget.myLocation.target,
                                     )));
-
+                        //reads from where-to cubit to display user's destination
                         context.read<WhereToCubit>().emit(result);
                       },
                       decoration: InputDecoration(
@@ -114,6 +123,7 @@ class _HomePageState extends State<HomePage> {
                       height: 20,
                     ),
                     TextField(
+                      //shows user's starting point on the map
                       controller: TextEditingController(
                           text: context.watch<FromCubit>().state.name),
                       onTap: () async {
@@ -125,7 +135,7 @@ class _HomePageState extends State<HomePage> {
                                     )));
 
                         context.read<FromCubit>().emit(result);
-                        //Set the polylines
+                        //draw the polylines
                         PolylinePoints polylinePoints = PolylinePoints();
                         PolylineResult polylineResult =
                             await polylinePoints.getRouteBetweenCoordinates(

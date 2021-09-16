@@ -13,11 +13,9 @@ import 'package:wamui/cubits/where_to_cubit.dart';
 import 'package:wamui/routes/routes.gr.dart';
 
 //where program starts. this is the entry point of the program
-
 void main() async {
 //links program with the cubits
 // cubits store observable data temporarily. it is a lightweight state management
-
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
   runApp(MultiBlocProvider(providers: [
@@ -41,9 +39,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp.router(
       debugShowCheckedModeBanner: false,
-
-      //defines the system title and theme and sets app to light theme by default
-
+      //defines the system title and themes and sets app to light theme by default
       title: "Trafiki",
       theme: ThemeData(
           textTheme: GoogleFonts.latoTextTheme(),
