@@ -50,6 +50,32 @@ class TraffickInfo extends StatelessWidget {
                         child: Text(
                             state.flowSegmentData.freeFlowSpeed.toString()))
                   ],
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text("Confidence")),
+                    Expanded(
+                        child:
+                            Text(state.flowSegmentData.confidence.toString()))
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text("Current travel time")),
+                    Expanded(
+                        child: Text(
+                            state.flowSegmentData.currentTravelTime.toString()))
+                  ],
+                ),
+                Row(
+                  children: [
+                    Expanded(child: Text("Road Closure")),
+                    Expanded(
+                        child: CupertinoSwitch(
+                      value: state.flowSegmentData.roadClosure!,
+                      onChanged: (bool value) {},
+                    ))
+                  ],
                 )
               ],
             );
